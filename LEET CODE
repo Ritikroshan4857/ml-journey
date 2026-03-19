@@ -1,0 +1,74 @@
+# ============================================
+# LC #20 - Valid Parentheses
+# Difficulty: Easy
+# Pattern: Stack
+# Time: O(n) | Space: O(n)
+# ============================================
+#
+# Problem:
+# Given a string containing '()[]{}',
+# determine if the brackets are valid.
+# Rules:
+# 1. Open brackets closed by same type
+# 2. Open brackets closed in correct order
+# 3. Every close bracket has matching open
+#
+# Example:
+# Input:  s = "()[]{}"  → Output: True
+# Input:  s = "(]"      → Output: False
+#
+# Approach:
+# Stack — last opened must be first closed (LIFO)
+# Hash map maps each closer to its expected opener
+# ============================================
+
+class Solution:
+    def isValid(self, s):
+        stack = []
+        pairs = {')': '(', '}': '{', ']': '['}
+        for c in s:
+            if c in pairs:
+                if not stack or stack[-1] != pairs[c]:
+                    return False
+                stack.pop()
+            else:
+                stack.append(c)
+        return not stack
+
+
+#53. Maximum Subarray
+#Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+ 
+
+#Example 1:
+
+#Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+#Output: 6
+#Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+#Example 2:
+
+#Input: nums = [1]
+#Output: 1
+#Explanation: The subarray [1] has the largest sum 1.
+#Example 3:
+
+#Input: nums = [5,4,-1,7,8]
+#Output: 23
+#Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+ 
+
+#Constraints:
+
+#1 <= nums.length <= 105
+#-104 <= nums[i] <= 104
+
+
+class Solution:
+    def maxSubArray(self, nums):
+        current_sum = nums[0]
+        max_sum = nums[0]
+        for num in nums[1:]:
+            current_sum = max(num, current_sum + num)
+            max_sum = max(max_sum, current_sum)
+        return max_sum
