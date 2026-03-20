@@ -72,3 +72,25 @@ class Solution:
             current_sum = max(num, current_sum + num)
             max_sum = max(max_sum, current_sum)
         return max_sum
+
+
+
+-- ============================================
+-- LC #182 - Duplicate Emails
+-- Difficulty: Easy
+-- Pattern: GROUP BY + HAVING
+-- Time: O(n) | Space: O(n)
+-- ============================================
+-- Problem:
+-- Find all emails that appear more than once.
+--
+-- Key concept:
+-- GROUP BY creates one bucket per unique email.
+-- HAVING COUNT(*) > 1 keeps only duplicate buckets.
+-- Cannot use WHERE here — WHERE runs before GROUP BY.
+-- ============================================
+
+SELECT email AS Email
+FROM Person
+GROUP BY email
+HAVING COUNT(*) > 1
